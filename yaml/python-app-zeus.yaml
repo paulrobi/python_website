@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: zeus-dep
+  name: zeus-dep
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: zeus-dep
+  template:
+    metadata:
+      labels:
+        app: zeus-dep
+    spec:
+      containers:
+      - image: "singharunk/portfolio"
+        name: portfolio
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 5000

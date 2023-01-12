@@ -1,0 +1,7 @@
+notes
+.vscode/settings.json
+demo.log
+.vscode/*
+__pycache__/
+creds
+creds/*
